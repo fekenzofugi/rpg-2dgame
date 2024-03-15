@@ -19,5 +19,7 @@ public class Main {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         window.setLocation(4000, 500);
+
+        gamePanel.startGameThread();
     }
 }
