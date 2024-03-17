@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Player extends Entity {
+
     GamePanel gp;
     KeyHandler keyHandler;
 
@@ -117,5 +118,4 @@ public class Player extends Entity {
         }
         g2.drawImage(image, getX(), getY(), gp.getTileSize(), gp.getTileSize(), null);
     }
-
 }

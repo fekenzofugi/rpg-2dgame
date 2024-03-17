@@ -3,6 +3,7 @@ package entity;
 import java.awt.image.BufferedImage;
 
 public class Entity { // This stores variables that will be used in player, monster and npc classes
+
     private int x;
     private int y;
     private int speed;
