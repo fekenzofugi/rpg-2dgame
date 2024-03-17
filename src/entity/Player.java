@@ -21,23 +21,23 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
-        speed = 4;
-        direction = "down";
+        setX(100);
+        setY(100);
+        setSpeed(4);
+        setDirection("down");
     }
 
     public void getPlayerImage() {
         try {
 
-            up1 = ImageIO.read(this.getClass().getResourceAsStream("/player/boy_up_1.png"));
-            up2 = ImageIO.read(this.getClass().getResourceAsStream("/player/boy_up_2.png"));
-            down1 = ImageIO.read(this.getClass().getResourceAsStream("/player/boy_down_1.png"));
-            down2 = ImageIO.read(this.getClass().getResourceAsStream("/player/boy_down_2.png"));
-            left1 = ImageIO.read(this.getClass().getResourceAsStream("/player/boy_left_1.png"));
-            left2 = ImageIO.read(this.getClass().getResourceAsStream("/player/boy_left_2.png"));
-            right1 = ImageIO.read(this.getClass().getResourceAsStream("/player/boy_right_1.png"));
-            right2 = ImageIO.read(this.getClass().getResourceAsStream("/player/boy_right_2.png"));
+            setUp1(ImageIO.read(this.getClass().getResourceAsStream("/player/boy_up_1.png")));
+            setUp2(ImageIO.read(this.getClass().getResourceAsStream("/player/boy_up_2.png")));
+            setDown1(ImageIO.read(this.getClass().getResourceAsStream("/player/boy_down_1.png")));
+            setDown2(ImageIO.read(this.getClass().getResourceAsStream("/player/boy_down_2.png")));
+            setLeft1(ImageIO.read(this.getClass().getResourceAsStream("/player/boy_left_1.png")));
+            setLeft2(ImageIO.read(this.getClass().getResourceAsStream("/player/boy_left_2.png")));
+            setRight1(ImageIO.read(this.getClass().getResourceAsStream("/player/boy_right_1.png")));
+            setRight2(ImageIO.read(this.getClass().getResourceAsStream("/player/boy_right_2.png")));
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -46,32 +46,33 @@ public class Player extends Entity {
 
     public void update() { // this method gets called 60 times per second.
 
-        if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed) {
+        if (keyHandler.isUpPressed() || keyHandler.isDownPressed() || keyHandler.isLeftPressed() || keyHandler.isRightPressed()) {
             // In Java the upper left corner is X:0 Y:0.
             // x increases to the right
             // y increases as they go down
-            if (keyHandler.upPressed) {
-                direction = "up";
-                y -= speed;
-            } else if (keyHandler.downPressed) {
-                direction = "down";
-                y += speed;
-            } else if (keyHandler.leftPressed) {
-                direction = "left";
-                x -= speed;
-            } else if (keyHandler.rightPressed) {
-                direction = "right";
-                x += speed;
+            if (keyHandler.isUpPressed()) {
+                setDirection("up");
+                setY(getY() - getSpeed());
+            } else if (keyHandler.isDownPressed()) {
+                setDirection("down");
+                setY(getY() + getSpeed());
+
+            } else if (keyHandler.isLeftPressed()) {
+                setDirection("left");
+                setX(getX() - getSpeed());
+            } else if (keyHandler.isRightPressed()) {
+                setDirection("right");
+                setX(getX() + getSpeed());
             }
 
-            spriteCounter++; // player image changes in every 12 frames
-            if (spriteCounter > 12) {
-                if (spriteNumber == 1) {
-                    spriteNumber = 2;
-                } else if (spriteNumber == 2) {
-                    spriteNumber = 1;
+            setSpriteCounter(getSpriteCounter() + 1); // player image changes in every 12 frames
+            if (getSpriteCounter() > 12) {
+                if (getSpriteNumber() == 1) {
+                    setSpriteNumber(2);
+                } else if (getSpriteNumber() == 2) {
+                    setSpriteNumber(1);
                 }
-                spriteCounter = 0;
+                setSpriteCounter(0);
             }
         }
     }
@@ -80,41 +81,41 @@ public class Player extends Entity {
 
         BufferedImage image = null;
 
-        switch (direction) {
+        switch (getDirection()) {
             case "up":
-                if (spriteNumber == 1) {
-                    image = up1;
+                if (getSpriteNumber() == 1) {
+                    image = getUp1();
                 }
-                if (spriteNumber == 2) {
-                    image = up2;
+                if (getSpriteNumber() == 2) {
+                    image = getUp2();
                 }
                 break;
             case "down":
-                if (spriteNumber == 1) {
-                    image = down1;
+                if (getSpriteNumber() == 1) {
+                    image = getDown1();
                 }
-                if (spriteNumber == 2) {
-                    image = down2;
+                if (getSpriteNumber() == 2) {
+                    image = getDown2();
                 }
                 break;
             case "left":
-                if (spriteNumber == 1) {
-                    image = left1;
+                if (getSpriteNumber() == 1) {
+                    image = getLeft1();
                 }
-                if (spriteNumber == 2) {
-                    image = left2;
+                if (getSpriteNumber() == 2) {
+                    image = getLeft2();
                 }
                 break;
             case "right":
-                if (spriteNumber == 1) {
-                    image = right1;
+                if (getSpriteNumber() == 1) {
+                    image = getRight1();
                 }
-                if (spriteNumber == 2) {
-                    image = right2;
+                if (getSpriteNumber() == 2) {
+                    image = getRight2();
                 }
                 break;
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, getX(), getY(), gp.getTileSize(), gp.getTileSize(), null);
     }
 
 }
